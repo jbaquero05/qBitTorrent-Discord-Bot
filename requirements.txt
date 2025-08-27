@@ -1,0 +1,4 @@
+discord.py==2.3.2
+aiohttp==3.9.1
+asyncio-mqtt==0.13.0
+qbittorrent-api==2025.7.0
