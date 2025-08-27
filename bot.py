@@ -182,14 +182,14 @@ async def torrent_status(ctx, *, movie_name: str = None):
         )
 
         progress_percent = torrent.progress * 100
-        progress_bar = "█" * int(progress_percent / 5) + "░" * (20 - int(progress_perc                                         ent / 5))
+        progress_bar = "█" * int(progress_percent / 5) + "░" * (20 - int(progress_percent / 5))
 
-        embed.add_field(name="📊 Progress", value=f"`{progress_bar}` {progress_percent                                         :.1f}%", inline=False)
-        embed.add_field(name="💾 Size", value=f"{bot.format_size(torrent.downloaded)}                                          / {bot.format_size(torrent.size)}", inline=True)
-        embed.add_field(name="🚀 Speed", value=f"⬇️ {bot.format_speed(torrent.dlspeed)}                                         \n⬆️ {bot.format_speed(torrent.upspeed)}", inline=True)
+        embed.add_field(name="📊 Progress", value=f"`{progress_bar}` {progress_percent:.1f}%", inline=False)
+        embed.add_field(name="💾 Size", value=f"{bot.format_size(torrent.downloaded)} / {bot.format_size(torrent.size)}", inline=True)
+        embed.add_field(name="🚀 Speed", value=f"⬇️ {bot.format_speed(torrent.dlspeed)}\n⬆️ {bot.format_speed(torrent.upspeed)}", inline=True)
         embed.add_field(name="⏰ ETA", value=bot.format_eta(torrent.eta), inline=True)
         embed.add_field(name="📈 Ratio", value=f"{torrent.ratio:.2f}", inline=True)
-        embed.add_field(name="👥 Seeds/Peers", value=f"{torrent.num_seeds} / {torrent.                                         num_leechs}", inline=True)
+        embed.add_field(name="👥 Seeds/Peers", value=f"{torrent.num_seeds} / {torrent.num_leechs}", inline=True)
         embed.add_field(name="🔧 State", value=torrent.state.title(), inline=True)
         embed.set_footer(text=f"Hash: {torrent.hash[:8]}...")
 
@@ -231,14 +231,14 @@ async def list_active_downloads(ctx):
     embed.description = "\n".join(torrent_list)
 
     if len(active_downloads) > 10:
-        embed.set_footer(text=f"Showing 10 of {len(active_downloads)} active downloads                                         ")
+        embed.set_footer(text=f"Showing 10 of {len(active_downloads)} active downloads")
 
     await ctx.send(embed=embed)
 
 @bot.event
 async def on_command_error(ctx, error):
     if isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send("❌ Missing required argument. Use `!help` for usage informatio                                         n.")
+        await ctx.send("❌ Missing required argument. Use `!help` for usage information.")
     elif isinstance(error, commands.CommandNotFound):
         return
     else:
@@ -253,14 +253,14 @@ if __name__ == "__main__":
     print("  !status <movie_name> - Get download status for a specific torrent")
     print("  !list - List all active torrents")
     print("\n⚙️  Configuration:")
-    print(f"  Discord Token: {'Set' if DISCORD_TOKEN != 'YOUR_DISCORD_BOT_TOKEN' else                                          'NOT SET'}")
+    print(f"  Discord Token: {'Set' if DISCORD_TOKEN != 'YOUR_DISCORD_BOT_TOKEN' else 'NOT SET'}")
     print(f"  qBittorrent URL: {QBITTORRENT_URL}")
     print(f"  qBittorrent User: {QBITTORRENT_USERNAME}")
     print(f"  Log Level: {LOG_LEVEL}")
 
     if DISCORD_TOKEN == 'YOUR_DISCORD_BOT_TOKEN':
-        logger.error("❌ Discord token not set! Please set the DISCORD_TOKEN environme                                         nt variable.")
-        print("❌ Discord token not set! Please set the DISCORD_TOKEN environment vari                                         able.")
+        logger.error("❌ Discord token not set! Please set the DISCORD_TOKEN environment variable.")
+        print("❌ Discord token not set! Please set the DISCORD_TOKEN environment variable.")
         exit(1)
 
     try:
